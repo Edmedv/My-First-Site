@@ -1,0 +1,64 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+
+<figure class="text-center">
+  <blockquote class="blockquote">
+    <p><h1>Таблица товаров</h1></p>
+  </blockquote>
+  </figure>
+
+
+<form method="post">
+    {% csrf_token %}
+    <figure class="text-center">
+    Сортировка по
+    <select aria-label="Default select example" name="var">
+      <option value="title">--------</option>
+      <option value="price">цене</option>
+    </select>
+<p></p>
+
+    Категории
+    <select aria-label="Default select example" name="kat">
+            <option value="{{ p.type }}">Все товары</option>
+        {% for s in kat %}
+            <option value="{{ s.type }}">{{ s.type }}</option>
+        {% endfor %}
+    </select>
+
+<p></p>
+    <button class="btn btn-primary" type="submit">Показать</button>
+    </figure>
+</form>
+
+<p></p>
+
+<div class="table-responsive">
+<table class="table align-middle" >
+  <thead>
+    <tr class="table-dark">
+      <th scope="col">#</th>
+      <th scope="col">Название</th>
+      <th scope="col">Категория</th>
+      <th scope="col">Цена</th>
+      <th scope="col">Фото</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for p in products %}
+    <tr class="align-center">
+      <th scope="row">>>></th>
+      <td>{{ p.title }}</td>
+      <td>{{ p.type }}</td>
+      <td>{{ p.price }}</td>
+      {% if p.photo %}
+        <td><img width="125" src="{{p.photo.url}}"></td>
+      {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

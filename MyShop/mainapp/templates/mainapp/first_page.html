@@ -43,6 +43,7 @@
       <th scope="col">Категория</th>
       <th scope="col">Цена</th>
       <th scope="col">Фото</th>
+      <th scope="col">В корзину</th>
     </tr>
   </thead>
   <tbody>
@@ -55,6 +56,14 @@
       {% if p.photo %}
         <td><img width="125" src="{{p.photo.url}}"></td>
       {% endif %}
+      <td>
+
+          <form method="post">
+              {% csrf_token %}
+              <button class="btn btn-primary" type="submit" name="basket" value="{{ p.title }}"">Добавить</button>
+          </form>
+
+      </td>
     </tr>
   {% endfor %}
   </tbody>

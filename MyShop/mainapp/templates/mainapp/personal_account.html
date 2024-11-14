@@ -2,9 +2,40 @@
 
 {% block content %}
 
-{% for i in basket %}
-    <p>{{ i.title }}</p>
-{% endfor %}
+<figure class="text-center">
+    <h2>Личный кабинет пользователя: {{ user.first_name }}</h2>
+</figure>
 
+
+<div class="container">
+  <div class="row">
+
+     <div class="col-sm-9">
+        <h3>   Мои данные</h3>
+
+     <div class="container">
+        <div class="row">
+          <div class="col-sm-2">Имя</div>
+          <div class="col-sm-2">{{ user.first_name }}</div>
+
+        </div>
+     </div>
+     <div class="container">
+        <div class="row">
+          <div class="col-sm-2">Фамилия</div>
+          <div class="col-sm-2">{{ user.last_name }}</div>
+        </div>
+     </div>
+    </div>
+
+     <div class="col-sm-3">
+        <h3>Моя корзина</h3>
+      {% for i in basket %}
+        <p>{{ i.title }}</p>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
 
 {% endblock %}

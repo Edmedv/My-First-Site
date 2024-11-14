@@ -52,6 +52,6 @@ def create_product(request):
 
 
 def personal_account(request):
-    a = User.objects.filter(username = f'{request.user}')[0]
-    s = a.basket.all()
-    return render(request, 'mainapp/personal_account.html', {'basket': s})
+    user = User.objects.filter(username = f'{request.user}')[0]
+    basket = user.basket.all()
+    return render(request, 'mainapp/personal_account.html', {'basket': basket, 'user': user})

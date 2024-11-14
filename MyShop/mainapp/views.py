@@ -24,12 +24,13 @@ def first_page(request):
             products = Product.objects.all()
             return render(request, 'mainapp/first_page.html', {'products': products, 'kat': kat})
         elif 'kat' in request.POST:
-            print('kat')
             l = TypeProduct.objects.filter(type=f"{request.POST['kat']}")
             if l:
                 l = l[0]
                 products = Product.objects.filter(type = f'{l.id}').order_by(f"{request.POST['var']}")
-                return render(request, 'mainapp/first_page.html', {'products': products, 'kat' :kat})
+                return render(request, 'mainapp/first_page.html',
+                              {'products': products,
+                               'kat': kat})
             else:
                 products = Product.objects.order_by(f"{request.POST['var']}")
                 return render(request, 'mainapp/first_page.html', {'products': products, 'kat': kat})
@@ -54,4 +55,7 @@ def create_product(request):
 def personal_account(request):
     user = User.objects.filter(username = f'{request.user}')[0]
     basket = user.basket.all()
+    if request.method == 'POST':
+        tag = user.basket.filter(title = f'{request.POST["basket"]}')[0]
+        user.basket.remove(tag)
     return render(request, 'mainapp/personal_account.html', {'basket': basket, 'user': user})

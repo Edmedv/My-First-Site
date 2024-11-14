@@ -12,6 +12,7 @@
 <form method="post">
     {% csrf_token %}
     <figure class="text-center">
+
     Сортировка по
     <select aria-label="Default select example" name="var">
       <option value="title">--------</option>
@@ -43,7 +44,7 @@
       <th scope="col">Категория</th>
       <th scope="col">Цена</th>
       <th scope="col">Фото</th>
-      <th scope="col">В корзину</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -55,12 +56,14 @@
       <td>{{ p.price }}</td>
       {% if p.photo %}
         <td><img width="125" src="{{p.photo.url}}"></td>
+      {% else %}
+        <td>Фото отсутствует</td>
       {% endif %}
       <td>
 
           <form method="post">
               {% csrf_token %}
-              <button class="btn btn-primary" type="submit" name="basket" value="{{ p.title }}"">Добавить</button>
+              <button class="btn btn-primary" type="submit" name="basket" value="{{ p.title }}"">В корзину</button>
           </form>
 
       </td>

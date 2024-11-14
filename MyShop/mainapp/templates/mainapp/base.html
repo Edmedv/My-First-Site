@@ -9,10 +9,16 @@
 </head>
 <body>
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <a href="{% url 'personal_account' %}" class="btn btn-primary" role="button" data-bs-toggle="button">Личный кабинет</a>
-  <a href="{% url 'logout' %}" class="btn btn-primary" role="button" data-bs-toggle="button">Выйти</a>
-</div>
+<div class="row justify-content-between">
+    <div class="col-3">
+      <a href="{% url 'home' %}" class="btn btn-primary" role="button" data-bs-toggle="button">Главная страница</a>
+    </div>
+    <div class="col-3">
+      <a href="{% url 'personal_account' %}" class="btn btn-primary" role="button" data-bs-toggle="button">{{ user.first_name }}</a>
+      <a href="{% url 'logout' %}" class="btn btn-primary" role="button" data-bs-toggle="button">Выйти</a>
+    </div>
+  </div>
+
 <p></p>
 
 {% block content %}
